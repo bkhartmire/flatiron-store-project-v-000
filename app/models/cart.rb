@@ -4,6 +4,11 @@ class Cart < ActiveRecord::Base
   has_many :items, through: :line_items
 
   def add_item(item)
-    self.line_items.create(cart_id: self.id, item_id: item.id)
+    line_item = self.line_items.build
+    line_item.item = item
+  end
+
+  def total
+    self.items.price.sum
   end
 end
