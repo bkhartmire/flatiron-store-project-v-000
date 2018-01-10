@@ -3,9 +3,14 @@ class Cart < ActiveRecord::Base
   has_many :line_items
   has_many :items, through: :line_items
 
-  def add_item(item)
-    line_item = self.line_items.build
-    line_item.item = item
+  def add_item(item_id)
+    line_item = self.line_items.find{|li| li.item_id == item_id.to_i}
+    if line_item
+      line_item.quantity += 1
+    else
+      line_item = self.line_items.build(item_id: item_id, cart_id: self.id)
+    end
+    line_item
   end
 
   def total

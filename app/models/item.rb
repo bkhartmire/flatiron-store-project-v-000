@@ -4,6 +4,6 @@ class Item < ActiveRecord::Base
   has_many :carts, through: :line_items
 
   def self.available_items
-    self.collect{|item| item.inventory > 0}
+    self.select{|item| item.inventory > 0}
   end
 end
