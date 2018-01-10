@@ -14,4 +14,10 @@ Item.all.each do |item|
   counter += 1
 end
 
-User.create(email: 'email@email.com', password: 'password')
+5.times do |i|
+  User.create(email: "camille#{i}@mail.com", password: "password")
+end
+
+5.times do |i|
+  Cart.create
+end
