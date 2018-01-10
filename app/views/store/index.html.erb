@@ -5,7 +5,7 @@
 
 <% @items.each do |item| %>
   <p><%= item.title %> | $<%= item.price.to_f/100 %> | </p>
-  <% if logged_in? %>
+  <% if user_signed_in? %>
     <%= form_tag line_items_path(item_id: item) do %>
       <%= hidden_field_tag 'item_id', item.id %>
       <%= submit_tag "Add to Cart" %>
