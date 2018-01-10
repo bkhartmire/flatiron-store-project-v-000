@@ -2,12 +2,13 @@
   <%= link_to category.title, category_path(category) %>
 <% end %>
 
-<% if logged_in? %>
-  <% @items.each do |item| %>
-    <p><%= item.title %> | <%= number_to_currency(item.price) %> | <%= button_to 'Add to Cart', line_items_path(item_id: item) %></p>
-  <% end %>
-<% else %>
-  <% @items.each do |item| %>
-    <p><%= item.title %> | <%= number_to_currency(item.price) %></p>
+
+<% @items.each do |item| %>
+  <p><%= item.title %> | $<%= item.price.to_f/100 %> | </p>
+  <% if logged_in? %>
+    <%= form_tag line_items_path(item_id: item) do %>
+      <%= hidden_field_tag 'item_id', item.id %>
+      <%= submit_tag "Add to Cart" %>
+    <% end %>
   <% end %>
 <% end %>
