@@ -6,14 +6,12 @@ class User < ActiveRecord::Base
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
   def current_cart
-    if self.carts.none?
-      self.carts.create(user_id: self.id)
-    end
-
-    if self.carts.last.status == "not submitted"
-      self.carts.last
-    elsif self.carts.last.status == "Submitted"
-      nil
+    if !self.carts.none?
+      if self.carts.last.status == "not submitted"
+        self.carts.last
+      elsif self.carts.last.status == "Submitted"
+        nil
+      end
     end
   end
 end
