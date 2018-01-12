@@ -15,7 +15,7 @@ Item.all.each do |item|
 end
 
 5.times do |i|
-  User.create(email: "camille#{i}@mail.com", password: "password")
+  User.create(email: "user#{i}@gmail.com", password: "password")
 end
 
 5.times do |i|
